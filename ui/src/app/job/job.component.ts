@@ -1,3 +1,5 @@
+import { CustomerService } from './../services/customer.service';
+import { CustomerModel } from './../models/customer.model';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EngineerService } from '../services/engineer.service';
@@ -12,20 +14,26 @@ import { JobModel } from '../models/job.model';
 export class JobComponent implements OnInit {
 
   public engineers: string[] = [];
+  public customers: CustomerModel[] = [];
 
   public jobs: JobModel[] = [];
 
   public newJob: JobModel = {
     jobId: null,
     engineer: null,
-    when: null
+    when: null,
+    customerId: null,
+    customerName: null,
+    customerType: null
   };
 
   constructor(
+    private customerService: CustomerService,
     private engineerService: EngineerService,
     private jobService: JobService) { }
 
   ngOnInit() {
+    this.customerService.GetCustomers().subscribe(customers => this.customers = customers);
     this.engineerService.GetEngineers().subscribe(engineers => this.engineers = engineers);
     this.jobService.GetJobs().subscribe(jobs => this.jobs = jobs);
   }
@@ -39,5 +47,4 @@ export class JobComponent implements OnInit {
       });
     }
   }
-
 }

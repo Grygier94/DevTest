@@ -1,4 +1,5 @@
 ﻿using System;
+using DeveloperTest.Enums;
 
 namespace DeveloperTest.Models
 {
@@ -9,5 +10,11 @@ namespace DeveloperTest.Models
         public string Engineer { get; set; }
 
         public DateTime When { get; set; }
+
+        public int? CustomerId { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public CustomerType? CustomerType { get; set; }
     }
 }
